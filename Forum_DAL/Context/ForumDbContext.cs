@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Forum_DAL.Context
 {
-     public class ForumDbContext: IdentityDbContext
+     public class ForumDbContext: IdentityDbContext<User>
      {
         public DbSet<Section> Sections { get; set; }
         public DbSet<Topic> Topics { get; set; }
@@ -22,6 +22,11 @@ namespace Forum_DAL.Context
             Database.EnsureCreated();
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ForumDB;Trusted_Connection=True;MultipleActiveResultSets=true");
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -30,6 +35,13 @@ namespace Forum_DAL.Context
                 new IdentityRole("user"),
                 new IdentityRole("admin")
             });
+
+            builder.Entity<Section>().HasData(new[]
+            {
+                new Section{
+                    Name=".NET"
+                }
+            }); 
 
         }
     }
