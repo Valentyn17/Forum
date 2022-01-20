@@ -1,6 +1,7 @@
 ﻿using Forum_DAL.Context;
 using Forum_DAL.Entities;
 using Forum_DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,34 +18,43 @@ namespace Forum_DAL.Repositories
         {
             _forumDbContext = forumDbContext;
         }
-        public Task<Section> AddAsync(Section entity)
+        public async Task AddAsync(Section entity)
         {
-            throw new NotImplementedException();
+            await _forumDbContext.Sections.AddAsync(entity);
         }
 
-        public Task<bool> Delete(Section entity)
+        public async Task Delete(Section entity)
         {
-            throw new NotImplementedException();
+            var element = await _forumDbContext.Sections.Include(x=>x.Topics).FirstOrDefaultAsync(x => x.Id == entity.Id);
+            if (element != null)
+            {
+                _forumDbContext.Sections.Remove(element);
+            }
         }
 
-        public Task<bool> DeletebyIdAsync(int id)
+        public async Task DeletebyIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var element = await _forumDbContext.Sections.Include(x => x.Topics).FirstOrDefaultAsync(x => x.Id == id);
+            if (element != null)
+            {
+                _forumDbContext.Sections.Remove(element);
+            }
         }
 
-        public IQueryable<Section> FindAllWithDetails()
+        public IEnumerable<Section> FindAllWithDetails()
         {
-            throw new NotImplementedException();
+            return _forumDbContext.Sections.Include(x => x.Topics);
         }
 
-        public Task<Section> GetByIdWithDetailsAsync(int id)
+        public async Task<Section> GetByIdWithDetailsAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _forumDbContext.Sections.Include(x => x.Topics).FirstOrDefaultAsync(x => x.Id==id);
         }
 
-        public Task<bool> UpdateAsync(Section entity)
+        public async Task UpdateAsync(Section entity)
         {
-            throw new NotImplementedException();
+            _forumDbContext.Entry(entity).State = EntityState.Modified;
+            await _forumDbContext.SaveChangesAsync();
         }
     }
 }

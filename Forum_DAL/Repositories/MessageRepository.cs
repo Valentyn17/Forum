@@ -1,6 +1,7 @@
 ﻿using Forum_DAL.Context;
 using Forum_DAL.Entities;
 using Forum_DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,34 +19,43 @@ namespace Forum_DAL.Repositories
             _forumDbContext = forumDbContext;
         }
 
-        public Task<Message> AddAsync(Message entity)
+        public async Task AddAsync(Message entity)
         {
-            throw new NotImplementedException();
+            await _forumDbContext.AddAsync(entity);
         }
 
-        public Task<bool> Delete(Message entity)
+        public async Task Delete(Message entity)
         {
-            throw new NotImplementedException();
+            var element = await _forumDbContext.Messages.FirstOrDefaultAsync(x => x.Id == entity.Id);
+            if (element != null)
+            {
+               _forumDbContext.Messages.Remove(element);
+            }
         }
 
-        public Task<bool> DeletebyIdAsync(int id)
+        public async Task DeletebyIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var element = await _forumDbContext.Messages.FirstOrDefaultAsync(x => x.Id == id);
+            if (element != null)
+            {
+                _forumDbContext.Messages.Remove(element);
+            }
         }
 
-        public IQueryable<Message> FindAllWithDetails()
+        public IEnumerable<Message> FindAllWithDetails()
         {
-            throw new NotImplementedException();
+            return _forumDbContext.Messages;
         }
 
         public Task<Message> GetByIdWithDetailsAsync(int id)
         {
-            throw new NotImplementedException();
+            return _forumDbContext.Messages.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<bool> UpdateAsync(Message entity)
+        public async Task UpdateAsync(Message entity)
         {
-            throw new NotImplementedException();
+            _forumDbContext.Entry(entity).State = EntityState.Modified;
+            await _forumDbContext.SaveChangesAsync();
         }
     }
 }

@@ -39,10 +39,11 @@ namespace Forum_DAL.Context
             builder.Entity<Section>().HasData(new[]
             {
                 new Section{
+                    Id=1,
                     Name=".NET"
                 }
-            }); 
+            });
 
         }
-    }
+     }
 }

@@ -13,6 +13,6 @@ namespace Forum_DAL.Entities
         [MinLength(2)]
         public string LastName { get; set; }
 
-        public ICollection<Message> Messages { get; set; }
+        public ICollection<Message> Messages { get; set; } = new List<Message>();
     }
 }

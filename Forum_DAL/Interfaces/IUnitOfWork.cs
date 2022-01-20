@@ -11,6 +11,8 @@ namespace Forum_DAL.Interfaces
         ISectionRepository SectionRepository { get; }
         ITopicRepository TopicRepository { get; }
 
+
+
         Task SaveAsync();
     }
 }

@@ -1,6 +1,9 @@
 ﻿using Forum_DAL.Context;
+using Forum_DAL.Entities;
 using Forum_DAL.Interfaces;
 using Forum_DAL.Repositories;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,11 +17,17 @@ namespace Forum_DAL.UnitOfWork
         private IMessageRepository _messageRepository;
         private ISectionRepository _sectionRepository;
         private ITopicRepository _topicRepository;
-        public UnitOfWork(ForumDbContext forumDbContext)
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+
+        public UnitOfWork(ForumDbContext forumDbContext, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             _forumDbContext = forumDbContext;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
+       
         public IMessageRepository MessageRepository
         {
             get
@@ -49,7 +58,7 @@ namespace Forum_DAL.UnitOfWork
         }
         public async Task SaveAsync()
         {
-            return await _forumDbContext.SaveChangesAsync();
+             await _forumDbContext.SaveChangesAsync();
 
         }
     }

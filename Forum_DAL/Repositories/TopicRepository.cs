@@ -1,6 +1,7 @@
 ﻿using Forum_DAL.Context;
 using Forum_DAL.Entities;
 using Forum_DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,34 +18,43 @@ namespace Forum_DAL.Repositories
         {
             _forumDbContext = forumDbContext;
         }
-        public Task<Topic> AddAsync(Topic entity)
+        public async Task AddAsync(Topic entity)
         {
-            throw new NotImplementedException();
+            await _forumDbContext.Topics.AddAsync(entity);
         }
 
-        public Task<bool> Delete(Topic entity)
+        public async Task Delete(Topic entity)
         {
-            throw new NotImplementedException();
+            var element = await _forumDbContext.Topics.Include(x=>x.Messages).FirstOrDefaultAsync(x => x.Id == entity.Id);
+            if (element != null)
+            {
+                _forumDbContext.Topics.Remove(element);
+            }
         }
 
-        public Task<bool> DeletebyIdAsync(int id)
+        public async Task DeletebyIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var element = await _forumDbContext.Topics.Include(x => x.Messages).FirstOrDefaultAsync(x => x.Id == id);
+            if (element != null)
+            {
+                _forumDbContext.Topics.Remove(element);
+            }
         }
 
-        public IQueryable<Topic> FindAllWithDetails()
+        public IEnumerable<Topic> FindAllWithDetails()
         {
-            throw new NotImplementedException();
+            return _forumDbContext.Topics.Include(x => x.Messages);
         }
 
-        public Task<Topic> GetByIdWithDetailsAsync(int id)
+        public async Task<Topic> GetByIdWithDetailsAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _forumDbContext.Topics.Include(x => x.Messages).FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<bool> UpdateAsync(Topic entity)
+        public async Task UpdateAsync(Topic entity)
         {
-            throw new NotImplementedException();
+            _forumDbContext.Entry(entity).State = EntityState.Modified;
+            await _forumDbContext.SaveChangesAsync();
         }
     }
 }

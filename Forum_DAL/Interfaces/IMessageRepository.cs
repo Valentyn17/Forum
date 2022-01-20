@@ -10,9 +10,9 @@ namespace Forum_DAL.Interfaces
     public interface IMessageRepository:IRepository<Message>
     {
         Task<Message> GetByIdWithDetailsAsync(int id);
-        IQueryable<Message> FindAllWithDetails();
+        IEnumerable<Message> FindAllWithDetails();
 
-        Task<Message> AddAsync(Message entity);
-        Task<bool> UpdateAsync(Message entity);
+        Task AddAsync(Message entity);
+        Task UpdateAsync(Message entity);
     }
 }

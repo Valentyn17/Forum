@@ -16,6 +16,6 @@ namespace Forum_DAL.Entities
         [MinLength(1)]
         public string Name { get; set; }
 
-        public ICollection<Topic> Topics { get; set; }
+        public ICollection<Topic> Topics { get; set; } = new List<Topic>();
     }
 }

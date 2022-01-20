@@ -21,7 +21,7 @@ namespace Forum_DAL.Entities
         public int  SectionId { get; set; }
         [Required]
         public Guid UserId { get; set; }
-        public ICollection<Message> Messages{ get; set; }
+        public ICollection<Message> Messages{ get; set; } = new List<Message>();
 
         public Section Section { get; set; }
         public User User { get; set; }
