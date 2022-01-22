@@ -41,20 +41,19 @@ namespace Forum_DAL.Repositories
             }
         }
 
-        public IEnumerable<Topic> FindAllWithDetails()
+        public IEnumerable<Topic> GetAll()
         {
             return _forumDbContext.Topics.Include(x => x.Messages);
         }
 
-        public async Task<Topic> GetByIdWithDetailsAsync(int id)
+        public async Task<Topic> GetByIdAsync(int id)
         {
             return await _forumDbContext.Topics.Include(x => x.Messages).FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task UpdateAsync(Topic entity)
+        public void Update(Topic entity)
         {
             _forumDbContext.Entry(entity).State = EntityState.Modified;
-            await _forumDbContext.SaveChangesAsync();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Forum_DAL.Entities
         [Required]
         public int  SectionId { get; set; }
         [Required]
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         public ICollection<Message> Messages{ get; set; } = new List<Message>();
 
         public Section Section { get; set; }

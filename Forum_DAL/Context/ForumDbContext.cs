@@ -10,6 +10,7 @@ namespace Forum_DAL.Context
 {
      public class ForumDbContext: IdentityDbContext<User>
      {
+        public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<Topic> Topics { get; set; }
         public DbSet<Message> Messages { get; set; }

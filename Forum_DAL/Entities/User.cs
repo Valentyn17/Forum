@@ -8,11 +8,7 @@ namespace Forum_DAL.Entities
 {
     public class User:IdentityUser
     {
-        [MinLength(2)]
-        public string FirstName { get; set; }
-        [MinLength(2)]
-        public string LastName { get; set; }
-
+        public UserProfile UserProfile { get; set; }
         public ICollection<Message> Messages { get; set; } = new List<Message>();
     }
 }

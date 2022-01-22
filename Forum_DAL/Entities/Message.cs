@@ -14,7 +14,7 @@ namespace Forum_DAL.Entities
         public int Id { get; set; }
       
         [Required]
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         
         [Required]
         [MinLength(5)]

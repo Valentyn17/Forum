@@ -9,10 +9,10 @@ namespace Forum_DAL.Interfaces
 {
     public interface ITopicRepository : IRepository<Topic>
     {
-        Task<Topic> GetByIdWithDetailsAsync(int id);
-        IEnumerable<Topic> FindAllWithDetails();
+        Task<Topic> GetByIdAsync(int id);
+        IEnumerable<Topic> GetAll();
 
         Task AddAsync(Topic entity);
-        Task UpdateAsync(Topic entity);
+        void Update(Topic entity);
     }
 }

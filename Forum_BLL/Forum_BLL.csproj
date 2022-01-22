@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Forum_DAL\Forum_DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>

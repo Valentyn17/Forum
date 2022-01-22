@@ -21,7 +21,7 @@ namespace Forum_DAL.Repositories
 
         public async Task AddAsync(Message entity)
         {
-            await _forumDbContext.AddAsync(entity);
+            await _forumDbContext.Messages.AddAsync(entity);
         }
 
         public async Task Delete(Message entity)
@@ -42,20 +42,19 @@ namespace Forum_DAL.Repositories
             }
         }
 
-        public IEnumerable<Message> FindAllWithDetails()
+        public IEnumerable<Message> GetAll()
         {
             return _forumDbContext.Messages;
         }
 
-        public Task<Message> GetByIdWithDetailsAsync(int id)
+        public Task<Message> GetByIdAsync(int id)
         {
             return _forumDbContext.Messages.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task UpdateAsync(Message entity)
+        public void Update(Message entity)
         {
-            _forumDbContext.Entry(entity).State = EntityState.Modified;
-            await _forumDbContext.SaveChangesAsync();
+            _forumDbContext.Entry(entity).State = EntityState.Modified;   
         }
     }
 }
