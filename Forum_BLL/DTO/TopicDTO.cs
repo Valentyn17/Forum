@@ -14,6 +14,6 @@ namespace Forum_BLL.DTO
         public int SectionId { get; set; }
         
         public string UserId { get; set; }
-        public ICollection<Message> Messages { get; set; }
+        public ICollection<int> MessagesIds { get; set; }
     }
 }
