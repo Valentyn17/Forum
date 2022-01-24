@@ -10,7 +10,7 @@ namespace Forum_DAL.Interfaces
         IMessageRepository MessageRepository { get; }
         ISectionRepository SectionRepository { get; }
         ITopicRepository TopicRepository { get; }
-
+        IUserProfileRepository UserProfileRepository { get; }
 
 
         Task SaveAsync();

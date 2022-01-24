@@ -17,14 +17,12 @@ namespace Forum_DAL.UnitOfWork
         private IMessageRepository _messageRepository;
         private ISectionRepository _sectionRepository;
         private ITopicRepository _topicRepository;
-        private readonly UserManager<User> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private IUserProfileRepository _userProfileRepository;
 
-        public UnitOfWork(ForumDbContext forumDbContext, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public UnitOfWork(ForumDbContext forumDbContext)
         {
             _forumDbContext = forumDbContext;
-            _userManager = userManager;
-            _roleManager = roleManager;
+           
         }
 
        
@@ -38,6 +36,15 @@ namespace Forum_DAL.UnitOfWork
             }
         }
 
+        public IUserProfileRepository UserProfileRepository
+        {
+            get 
+            {
+                if (_userProfileRepository == null)
+                    _userProfileRepository = new UserProfileRepository(_forumDbContext);
+                return _userProfileRepository;
+            }
+        }
         public ISectionRepository SectionRepository
         {
             get

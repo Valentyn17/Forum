@@ -35,7 +35,7 @@ namespace Forum_BLL.Interfaces
         /// <returns>
         /// List of all existing users.
         /// </returns>
-        Task<IEnumerable<UserDTO>> GetAllUsers();
+        IEnumerable<UserDTO> GetAllUsers();
         /// <summary>
         /// Method that asiigns user to an array of roles.
         /// </summary>
@@ -56,7 +56,7 @@ namespace Forum_BLL.Interfaces
         /// <returns>
         /// List of chosen user roles.
         /// </returns>
-        Task<IEnumerable<string>> GetRoles(string email);
+        Task<IEnumerable<string>> GetUserRoles(string email);
 
         /// <summary>
         /// Method returns list of all existing roles.

@@ -1,3 +1,5 @@
+using AutoMapper;
+using Forum_BLL.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +24,12 @@ namespace Forum_PL
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new EntityDTOProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
             services.AddRazorPages();
         }
 
