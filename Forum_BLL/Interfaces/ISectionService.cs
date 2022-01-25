@@ -13,7 +13,7 @@ namespace Forum_BLL.Interfaces
 
         IEnumerable<SectionDTO> FindAll();
 
-        Task<MessageDTO> FindByIdAsync(int id);
+        Task<SectionDTO> FindByIdAsync(int id);
         IQueryable<SectionDTO> GetSortedSectionsByTopicCount();
 
         Task<bool> UpdateAsync(SectionDTO model);

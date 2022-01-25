@@ -63,9 +63,9 @@ namespace Forum_DAL.UnitOfWork
                 return _topicRepository;
             }
         }
-        public async Task SaveAsync()
+        public async Task<int> SaveAsync()
         {
-             await _forumDbContext.SaveChangesAsync();
+             return await _forumDbContext.SaveChangesAsync();
 
         }
     }

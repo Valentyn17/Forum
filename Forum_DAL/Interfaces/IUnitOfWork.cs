@@ -13,6 +13,6 @@ namespace Forum_DAL.Interfaces
         IUserProfileRepository UserProfileRepository { get; }
 
 
-        Task SaveAsync();
+        Task<int> SaveAsync();
     }
 }
