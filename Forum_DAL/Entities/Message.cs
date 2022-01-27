@@ -12,13 +12,13 @@ namespace Forum_DAL.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-      
-        [Required]
         public string UserId { get; set; }
         
         [Required]
         [MinLength(5)]
         public string  Text { get; set; }
+        
+        [Required]
         public int TopicId { get; set; }
         public Topic Topic { get; set; }
         public User User { get; set; }

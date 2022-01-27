@@ -39,9 +39,7 @@ namespace Forum_DAL.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true)
+                    AccessFailedCount = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -168,6 +166,28 @@ namespace Forum_DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserProfiles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    DateOfBirth = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserProfiles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserProfiles_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Topics",
                 columns: table => new
                 {
@@ -176,8 +196,7 @@ namespace Forum_DAL.Migrations
                     Title = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: false),
                     SectionId = table.Column<int>(nullable: false),
-                    UserId = table.Column<Guid>(nullable: false),
-                    UserId1 = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -189,11 +208,11 @@ namespace Forum_DAL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Topics_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Topics_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -202,10 +221,9 @@ namespace Forum_DAL.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<Guid>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
                     Text = table.Column<string>(nullable: false),
-                    TopicId = table.Column<int>(nullable: false),
-                    UserId1 = table.Column<string>(nullable: true)
+                    TopicId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -217,8 +235,8 @@ namespace Forum_DAL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Messages_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Messages_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -227,12 +245,12 @@ namespace Forum_DAL.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "bcd7ed50-7a5b-4efe-8529-4aa74f10bb5b", "7cbe369a-bb76-41e0-ac25-d71e04389dd9", "user", null });
+                values: new object[] { "17af339e-7ff2-4833-b503-5b2d325affc5", "3329a465-2cd0-4e39-9bb5-25ca9603b4cd", "user", null });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "d51a300a-2917-4278-a539-a0f37336ecc8", "a19a4dae-31b1-45fd-828c-4794c3ae176a", "admin", null });
+                values: new object[] { "d2aa7fdd-0d8a-41c0-b5f7-f2c48e812406", "34651d97-7fe0-4c46-85ea-f81120da191a", "admin", null });
 
             migrationBuilder.InsertData(
                 table: "Sections",
@@ -284,9 +302,9 @@ namespace Forum_DAL.Migrations
                 column: "TopicId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Messages_UserId1",
+                name: "IX_Messages_UserId",
                 table: "Messages",
-                column: "UserId1");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Topics_SectionId",
@@ -294,9 +312,16 @@ namespace Forum_DAL.Migrations
                 column: "SectionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Topics_UserId1",
+                name: "IX_Topics_UserId",
                 table: "Topics",
-                column: "UserId1");
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserProfiles_UserId",
+                table: "UserProfiles",
+                column: "UserId",
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -318,6 +343,9 @@ namespace Forum_DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "Messages");
+
+            migrationBuilder.DropTable(
+                name: "UserProfiles");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

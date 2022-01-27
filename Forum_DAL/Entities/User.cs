@@ -9,6 +9,7 @@ namespace Forum_DAL.Entities
     public class User:IdentityUser
     {
         public UserProfile UserProfile { get; set; }
+        public ICollection<Topic> Topics { get; set; } = new List<Topic>();
         public ICollection<Message> Messages { get; set; } = new List<Message>();
     }
 }

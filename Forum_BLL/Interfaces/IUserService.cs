@@ -10,7 +10,7 @@ namespace Forum_BLL.Interfaces
 {
     public interface IUserService
     {
-        Task<bool> Register(RegisterModel user);
+        Task<bool> Register(Register user);
        
         
         /// <summary>

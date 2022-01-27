@@ -33,17 +33,14 @@ namespace Forum_DAL.Migrations
                     b.Property<int>("TopicId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("TopicId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Messages");
                 });
@@ -89,17 +86,15 @@ namespace Forum_DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SectionId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Topics");
                 });
@@ -122,12 +117,6 @@ namespace Forum_DAL.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -175,6 +164,34 @@ namespace Forum_DAL.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Forum_DAL.Entities.UserProfile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
+
+                    b.ToTable("UserProfiles");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -204,14 +221,14 @@ namespace Forum_DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bcd7ed50-7a5b-4efe-8529-4aa74f10bb5b",
-                            ConcurrencyStamp = "7cbe369a-bb76-41e0-ac25-d71e04389dd9",
+                            Id = "17af339e-7ff2-4833-b503-5b2d325affc5",
+                            ConcurrencyStamp = "3329a465-2cd0-4e39-9bb5-25ca9603b4cd",
                             Name = "user"
                         },
                         new
                         {
-                            Id = "d51a300a-2917-4278-a539-a0f37336ecc8",
-                            ConcurrencyStamp = "a19a4dae-31b1-45fd-828c-4794c3ae176a",
+                            Id = "d2aa7fdd-0d8a-41c0-b5f7-f2c48e812406",
+                            ConcurrencyStamp = "34651d97-7fe0-4c46-85ea-f81120da191a",
                             Name = "admin"
                         });
                 });
@@ -330,7 +347,7 @@ namespace Forum_DAL.Migrations
 
                     b.HasOne("Forum_DAL.Entities.User", "User")
                         .WithMany("Messages")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Forum_DAL.Entities.Topic", b =>
@@ -342,8 +359,17 @@ namespace Forum_DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("Forum_DAL.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId1");
+                        .WithMany("Topics")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Forum_DAL.Entities.UserProfile", b =>
+                {
+                    b.HasOne("Forum_DAL.Entities.User", "User")
+                        .WithOne("UserProfile")
+                        .HasForeignKey("Forum_DAL.Entities.UserProfile", "UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

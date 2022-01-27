@@ -94,7 +94,7 @@ namespace Forum_BLL.Services
 
         }
 
-        public async Task<bool> Register(RegisterModel user)
+        public async Task<bool> Register(Register user)
         {
             var newUser = new User
             {

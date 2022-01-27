@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Forum_BLL.DTO
 {
-    public class RegisterModel
+    public class Register
     {
         public string Email { get; set; }
         public string Password { get; set; }
