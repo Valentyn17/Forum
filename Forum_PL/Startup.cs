@@ -8,6 +8,7 @@ using Forum_DAL.Interfaces;
 using Forum_DAL.Repositories;
 using Forum_DAL.UnitOfWork;
 using Forum_PL.Helpers;
+using Forum_PL.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -52,6 +53,7 @@ namespace Forum_PL
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new EntityDTOProfile());
+                mc.AddProfile(new DtoModelsProfile());
             });
 
             IMapper mapper = mapperConfig.CreateMapper();
@@ -61,8 +63,9 @@ namespace Forum_PL
                 options.Password.RequiredLength = 5;
 
             }).AddEntityFrameworkStores<ForumDbContext>();
-            services.AddRazorPages();
             services.AddControllers();
+            services.AddRazorPages();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,8 +90,11 @@ namespace Forum_PL
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller}/{action=Index}/{id?}");
             });
+
         }
     }
 }
