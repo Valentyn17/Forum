@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Forum_BLL.DTO;
 using Forum_BLL.Interfaces;
 using Forum_PL.Filters;
 using Forum_PL.Models;
@@ -8,12 +9,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Forum_PL.Controllers
 {
     [ModelStateActionFilter]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class SectionController : ControllerBase
     {
@@ -27,36 +26,49 @@ namespace Forum_PL.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/<SectionController>
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_mapper.Map<SectionModel>(_sectionService.FindAll()));
+            return Ok(_mapper.Map<IEnumerable<SectionModel>>(_sectionService.FindAll()));
         }
 
-        // GET api/<SectionController>/5
+        [HttpGet("getSortedSections")]
+        public IActionResult GetSorted()
+        {
+            return Ok(_mapper.Map<IEnumerable<SectionModel>>(_sectionService.GetSortedSectionsByTopicCount()));
+        }
+
+
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            return Ok(_mapper.Map<SectionModel>(_sectionService.FindByIdAsync(id)));
         }
 
-        // POST api/<SectionController>
+
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post(SectionModel model)
         {
+            var section = _mapper.Map<SectionDTO>(model);
+            await _sectionService.CreateAsync(section);
+            return Ok();
         }
 
-        // PUT api/<SectionController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+  
+        [HttpPut()]
+        public async Task<IActionResult> Put(SectionModel model)
         {
+            var section = _mapper.Map<SectionDTO>(model);
+            await _sectionService.UpdateAsync(section);
+            return Ok();
         }
 
-        // DELETE api/<SectionController>/5
+
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            await _sectionService.DeleteAsync(id);
+            return Ok();
         }
     }
 }

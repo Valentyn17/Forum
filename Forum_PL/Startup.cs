@@ -88,12 +88,17 @@ namespace Forum_PL
 
             app.UseAuthorization();
 
+            app.UseEndpoints(endpoins =>
+            {
+                endpoins.MapRazorPages();
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
+      
 
         }
     }
