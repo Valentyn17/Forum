@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Forum_BLL.DTO;
 using Forum_BLL.Interfaces;
 using Forum_PL.Filters;
 using Forum_PL.Models;
@@ -28,36 +29,46 @@ namespace Forum_PL.Controllers
         }
 
 
-        // GET: <MessageController>
         [HttpGet]
         public ActionResult Get()
         {
             return Ok(_mapper.Map<IEnumerable<MessageModel>>(_messageService.FindAll()));
         }
 
-        // GET <MessageController>/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             return Ok(_mapper.Map<MessageModel>(_messageService.FindByIdAsync(id)));
         }
 
-        // POST api/<MessageController>
+        [HttpGet("getByUserId/{id}")]
+        public IActionResult GetByUserId(string id)
+        {
+            return Ok(_mapper.Map<IEnumerable<MessageModel>>(_messageService.FindByUserId(id)));
+        }
+
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Create(MessageModel model)
         {
+            var message = _mapper.Map<MessageDTO>(model);
+            await _messageService.CreateAsync(message);
+            return Ok();
         }
 
-        // PUT api/<MessageController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+
+        [HttpPut]
+        public async Task<IActionResult> Update(MessageModel model)
         {
+            var message = _mapper.Map<MessageDTO>(model);
+            await _messageService.UpdateAsync(message);
+            return Ok();
         }
 
-        // DELETE api/<MessageController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            await _messageService.DeleteAsync(id);
+            return Ok();
         }
     }
 }

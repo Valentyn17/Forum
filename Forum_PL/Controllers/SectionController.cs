@@ -70,5 +70,7 @@ namespace Forum_PL.Controllers
             await _sectionService.DeleteAsync(id);
             return Ok();
         }
+
+        
     }
 }

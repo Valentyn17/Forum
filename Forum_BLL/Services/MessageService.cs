@@ -57,6 +57,8 @@ namespace Forum_BLL.Services
 
         public IQueryable<MessageDTO> FindByUserId(string userId)
         {
+            if (userId == null)
+                throw new ForumException("Id was not setted");
             var messages = _unitOfWork.MessageRepository.GetAll().Where(m => m.UserId == userId);
             return _mapper.Map<IQueryable<MessageDTO>>(messages);
         }

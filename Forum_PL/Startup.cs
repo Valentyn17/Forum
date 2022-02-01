@@ -7,6 +7,7 @@ using Forum_DAL.Entities;
 using Forum_DAL.Interfaces;
 using Forum_DAL.Repositories;
 using Forum_DAL.UnitOfWork;
+using Forum_PL.Filters;
 using Forum_PL.Helpers;
 using Forum_PL.Infrastructure;
 using Microsoft.AspNetCore.Builder;
@@ -63,7 +64,10 @@ namespace Forum_PL
                 options.Password.RequiredLength = 5;
 
             }).AddEntityFrameworkStores<ForumDbContext>();
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                options.Filters.Add(new CustomExceptionFilterAttribute()); 
+            });
             services.AddRazorPages();
             
         }

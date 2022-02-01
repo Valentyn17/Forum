@@ -119,6 +119,8 @@ namespace Forum_BLL.Services
                 DateOfBirth=user.DateOfBirth
             };
             await _unitOfWork.UserProfileRepository.AddAsync(userProfile);
+            newUser.UserProfile = userProfile;
+            await _userManager.UpdateAsync(newUser);
             return true;
 
         }
