@@ -49,7 +49,7 @@ namespace Forum_PL
                 options.UseSqlServer(Configuration.GetConnectionString("ForumDB")));
 
             services.Configure<JwtSettings>(Configuration.GetSection("Jwt"));
-
+            services.AddSwaggerGen();
 
             var mapperConfig = new MapperConfiguration(mc =>
             {
@@ -62,6 +62,8 @@ namespace Forum_PL
             services.AddIdentity<User, IdentityRole>(options=>
             {
                 options.Password.RequiredLength = 5;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
 
             }).AddEntityFrameworkStores<ForumDbContext>();
             services.AddControllers(options =>
@@ -102,7 +104,12 @@ namespace Forum_PL
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
-      
+
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
+
 
         }
     }

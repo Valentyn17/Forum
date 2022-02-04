@@ -20,6 +20,7 @@ namespace Forum_BLL.Services
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+      
 
         public UserService(IUnitOfWork unitOfWork, IMapper mapper, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
@@ -103,12 +104,13 @@ namespace Forum_BLL.Services
             };
 
             var result = await _userManager.CreateAsync(newUser, user.Password);
-            await _userManager.AddToRoleAsync(newUser, "user");
-
             if (!result.Succeeded)
             {
                 return false;
             }
+            await _userManager.AddToRoleAsync(newUser, "user");
+
+            
 
             var userId = this.GetUserByEmailAsync(user.Email).Result.Id;
             var userProfile = new UserProfile
@@ -116,7 +118,7 @@ namespace Forum_BLL.Services
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 UserId = userId,
-                DateOfBirth=user.DateOfBirth
+                DateOfBirth = user.DateOfBirth
             };
             await _unitOfWork.UserProfileRepository.AddAsync(userProfile);
             newUser.UserProfile = userProfile;
