@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SectionComponent } from './section/section.component';
 import { TopicComponent } from './topic/topic.component';
 import { MessageComponent } from './message/message.component';
+import { SharedService } from './shared.service';
 
 @NgModule({
   declarations: [

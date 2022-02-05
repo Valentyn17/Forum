@@ -3,6 +3,7 @@ using Forum_BLL.Interfaces;
 using Forum_PL.Filters;
 using Forum_PL.Helpers;
 using Forum_PL.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System;
@@ -54,7 +55,12 @@ namespace Forum_PL.Controllers
                 Password = model.Password
             });
 
+
             if (user is null) return BadRequest();
+
+            HttpContext.Session.SetInt32("id", 228);
+
+            Console.WriteLine(HttpContext.Session.GetInt32("id"));
 
             var roles = await _userService.GetUserRoles(user.Email);
 
