@@ -3,6 +3,7 @@ using Forum_BLL.Interfaces;
 using Forum_PL.Filters;
 using Forum_PL.Helpers;
 using Forum_PL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -56,7 +57,7 @@ namespace Forum_PL.Controllers
             });
 
 
-            if (user is null) return BadRequest();
+            if (user is null) return BadRequest("Such user doesn't exist");
 
             HttpContext.Session.SetInt32("id", 228);
 

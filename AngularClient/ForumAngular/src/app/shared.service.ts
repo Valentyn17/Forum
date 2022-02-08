@@ -7,7 +7,24 @@ import { first, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class SharedService {
-  readonly APIUrl = "https://localhost:44392/api";
+  readonly APIUrl = "http://localhost:49414";
   
     constructor(private http: HttpClient) { }
+
+
+    getSectionList():Observable<any[]>{
+      return this.http.get<any>(this.APIUrl+'/Section');
+    }
+
+    addSection(val: any){
+      return this.http.post(this.APIUrl+'/Section', val);
+    }
+  
+    updateSection(val: any){
+      return this.http.put(this.APIUrl+'/Section', val);
+    }
+    deleteSection(val: any){
+      return this.http.delete(this.APIUrl+'/Section/'+val);
+    }
+
 }
