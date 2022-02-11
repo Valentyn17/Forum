@@ -24,14 +24,12 @@ data-backdrop="static" data-keyboard="false">
 <table class="table table-stripped">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Section Name</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let dataItem of SectionList">
-            <td>{{dataItem.Id}}</td>
-            <td>{{dataItem.Name}}</td>
+            <td><a routerLink='section/{{dataItem.id}}/topic' >{{dataItem.name}}</a></td>
             <td>
                 <button type="button" class="btn btn-primary mr-1"
                 data-bs-toggle="modal" data-bs-target="#exampleModal"

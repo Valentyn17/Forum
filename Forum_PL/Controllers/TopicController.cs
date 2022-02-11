@@ -22,7 +22,7 @@ namespace Forum_PL.Controllers
 
         private readonly IMapper _mapper;
 
-        public TopicController(ITopicService topicService, IMapper mapper)
+        public TopicController(ITopicService topicService,IMapper mapper)
         {
             _topicService = topicService;
             _mapper = mapper;

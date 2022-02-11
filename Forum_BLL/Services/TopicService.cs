@@ -26,7 +26,7 @@ namespace Forum_BLL.Services
         {
             if (model == null)
             {
-                throw new ForumException("Message can't be created");
+                throw new ForumException("Topic can't be created");
             }
             var topic = _mapper.Map<Topic>(model);
             await _unitOfWork.TopicRepository.AddAsync(topic);
@@ -54,13 +54,13 @@ namespace Forum_BLL.Services
             return _mapper.Map<TopicDTO>(topic);
         }
 
-        public IQueryable<TopicDTO> GetBySectionId(int id)
+        public IEnumerable<TopicDTO> GetBySectionId(int id)
         {
             var topics = _unitOfWork.TopicRepository.GetAll().Where(t => t.SectionId == id);
-            return _mapper.Map<IQueryable<TopicDTO>>(topics);
+            return _mapper.Map<IEnumerable<TopicDTO>>(topics);
         }
 
-        public IQueryable<TopicDTO> GetByUserId(string id)
+        public IEnumerable<TopicDTO> GetByUserId(string id)
         {
             var topics = _unitOfWork.TopicRepository.GetAll().Where(t => t.UserId == id);
             return _mapper.Map<IQueryable<TopicDTO>>(topics);

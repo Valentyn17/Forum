@@ -14,8 +14,8 @@ namespace Forum_BLL.Interfaces
         IEnumerable<TopicDTO> FindAll();
 
         Task<TopicDTO> FindByIdAsync(int id);
-        IQueryable<TopicDTO> GetByUserId(string id);
-        IQueryable<TopicDTO> GetBySectionId(int id);
+        IEnumerable<TopicDTO> GetByUserId(string id);
+        IEnumerable<TopicDTO> GetBySectionId(int id);
 
         Task<bool> UpdateAsync(TopicDTO model);
         Task<bool> DeleteAsync(int id);

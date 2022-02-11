@@ -13,6 +13,10 @@ namespace Forum_PL.Models
         [Required]
         [MinLength(2)]
         public string Name { get; set; }
-        public ICollection<int> TopicsIds { get; set; } = new List<int>();
+        public ICollection<int> TopicsIds { get; set; }
+        public SectionModel()
+        {
+            TopicsIds = new List<int>();
+        }
     }
 }

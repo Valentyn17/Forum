@@ -23,12 +23,13 @@ namespace Forum_BLL.Infrastructure
                 .ForMember(t => t.MessagesIds, opt => opt.MapFrom(a => a.Messages.Select(x => x.Id)))
                 .ReverseMap();
             CreateMap<Section, SectionDTO>()
-                .ForMember(s => s.TopicsIds, opt => opt.MapFrom(section => section.Topics.Select(t => t.Id)));
+                .ForMember(s => s.TopicsIds, opt => opt.MapFrom(section => section.Topics.Select(t => t.Id)))
+                .ReverseMap();
             CreateMap<User, UserDTO>()
                 .ForMember(u => u.FirstName, opt => opt.MapFrom(up => up.UserProfile.FirstName))
                 .ForMember(u => u.Email, opt => opt.MapFrom(up => up.Email))
                 .ForMember(u => u.LastName, opt => opt.MapFrom(up => up.UserProfile.LastName))
-                .ForMember(u => u.DateOfBirth, opt => opt.MapFrom(up => up.UserProfile.DateOfBirth));
+                .ForMember(u => u.DateOfBirth, opt => opt.MapFrom(up => up.UserProfile.DateOfBirth)).ReverseMap();
 
         }
     }

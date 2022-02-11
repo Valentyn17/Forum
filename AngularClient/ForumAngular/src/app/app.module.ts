@@ -18,6 +18,8 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ShowSectionComponent } from './section/show-section/show-section.component';
 import { AddUpdateSectionComponent } from './section/add-update-section/add-update-section.component';
+import { RouterModule } from '@angular/router';
+import { AddUpdateTopicComponent } from './topic/add-update-topic/add-update-topic.component';
 
 
 
@@ -30,11 +32,13 @@ import { AddUpdateSectionComponent } from './section/add-update-section/add-upda
     LoginComponent,
     RegistrationComponent,
     ShowSectionComponent,
-    AddUpdateSectionComponent
+    AddUpdateSectionComponent,
+    AddUpdateTopicComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RouterModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,

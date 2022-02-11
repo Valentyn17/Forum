@@ -20,6 +20,10 @@ namespace Forum_PL.Models
         public int SectionId { get; set; }
         [Required]
         public string UserId { get; set; }
-        public ICollection<int> MessagesIds { get; set; } = new List<int>();
+        public ICollection<int> MessagesIds { get; set; }
+        public TopicModel()
+        {
+             MessagesIds= new List<int>();
+        }
     }
 }

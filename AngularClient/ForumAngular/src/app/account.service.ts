@@ -56,7 +56,7 @@ export class AccountService {
       },
       (error:HttpErrorResponse) => {
         this.toastr.error('Invalid password or email', 'Error');
-      });;
+      });
   }
 
   ifLoggedIn():boolean {
@@ -69,6 +69,12 @@ export class AccountService {
     localStorage.removeItem('token');
     this.router.navigate(['']);
   }
+
+  getUserByEmail(email: any)
+  {
+    return this.http.get(this.BaseURI + '/Account/getUserByEmail', email);
+  }
+
   public getUser(token:string):User {
     let a = JSON.parse(atob(token.split('.')[1]))["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
     let b = JSON.parse(atob(token.split('.')[1]))["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]

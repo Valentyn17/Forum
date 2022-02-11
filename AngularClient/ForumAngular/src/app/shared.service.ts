@@ -27,4 +27,26 @@ export class SharedService {
       return this.http.delete(this.APIUrl+'/Section/'+val);
     }
 
+    //topics
+    getTopicList():Observable<any[]>{
+      return this.http.get<any>(this.APIUrl+'/Topic');
+    }
+
+    addTopic(val: any){
+      return this.http.post(this.APIUrl+'/Topic', val);
+    }
+  
+    updateTopic(val: any){
+      return this.http.put(this.APIUrl+'/Topic', val);
+    }
+    deleteTopic(val: any){
+      return this.http.delete(this.APIUrl+'/Topic/'+val);
+    }
+    getTopicListBySection(val: any):Observable<any[]>{
+      return this.http.get<any>(this.APIUrl+'/Topic/getBySectionId/'+val);
+    }
+
+    
+
+
 }

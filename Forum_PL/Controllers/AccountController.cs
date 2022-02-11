@@ -93,5 +93,11 @@ namespace Forum_PL.Controllers
             return Ok();
         }
 
+        [HttpGet("getUserByEmail")]
+        public IActionResult GetUserByEmail(string email) 
+        { 
+            return Ok(_userService.GetUserByEmailAsync(email).Id);
+        }
+
     }
 }

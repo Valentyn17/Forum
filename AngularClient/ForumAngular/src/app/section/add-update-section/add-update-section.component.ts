@@ -11,7 +11,7 @@ export class AddUpdateSectionComponent implements OnInit {
   @Input() section :any;
   Id: any;
   Name:string;
-  topicsIds:any[];
+  TopicsIds:any[];
 
   constructor(private service:SharedService, private toastr: ToastrService) { }
 
@@ -36,7 +36,8 @@ export class AddUpdateSectionComponent implements OnInit {
 
     var item = {
       // Id: this.Id,
-      Name: this.Name
+      Name: this.Name,
+      TopicsIds: this.TopicsIds
     }
 
     this.service.addSection(item).subscribe(res => {this.toastr.success("Item added succsessfuly", "Success")});
@@ -45,7 +46,8 @@ export class AddUpdateSectionComponent implements OnInit {
   updateSection() {
     var item = {
       Id: this.Id,
-      Name: this.Name
+      Name: this.Name,
+      TopicsIds: this.TopicsIds
     }
 
     this.service.updateSection(item).subscribe(res => {this.toastr.success("Item updated succsessfuly", "Success")});
