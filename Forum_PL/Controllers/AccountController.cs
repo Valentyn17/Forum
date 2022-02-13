@@ -59,10 +59,6 @@ namespace Forum_PL.Controllers
 
             if (user is null) return BadRequest("Such user doesn't exist");
 
-            HttpContext.Session.SetInt32("id", 228);
-
-            Console.WriteLine(HttpContext.Session.GetInt32("id"));
-
             var roles = await _userService.GetUserRoles(user.Email);
 
             return Ok(JwtHelper.GenerateJwt(user, roles, _jwtSettings));
@@ -96,7 +92,7 @@ namespace Forum_PL.Controllers
         [HttpGet("getUserByEmail")]
         public IActionResult GetUserByEmail(string email) 
         { 
-            return Ok(_userService.GetUserByEmailAsync(email).Id);
+            return Ok(_userService.GetUserByEmailAsync(email));
         }
 
     }

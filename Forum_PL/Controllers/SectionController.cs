@@ -36,14 +36,14 @@ namespace Forum_PL.Controllers
         [HttpGet("getSortedSections")]
         public IActionResult GetSorted()
         {
-            return Ok(_mapper.Map<IEnumerable<SectionModel>>(_sectionService.GetSortedSectionsByTopicCount()));
+            return Ok(_mapper.Map<IEnumerable<SectionModel>>(_sectionService.FindAll()).OrderByDescending(x=>x.TopicsIds.Count));
         }
 
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return Ok(_mapper.Map<SectionModel>(_sectionService.FindByIdAsync(id)));
+            return Ok(_mapper.Map<SectionModel>(_sectionService.FindById(id)));
         }
 
 

@@ -29,7 +29,7 @@ data-backdrop="static" data-keyboard="false">
     </thead>
     <tbody>
         <tr *ngFor="let dataItem of TopicList">
-            <td>{{dataItem.title}}</td>
+            <td><a routerLink='{{dataItem.id}}' >{{dataItem.title}}</a></td>
             <td>
                 <button type="button" class="btn btn-primary mr-1"
                 data-bs-toggle="modal" data-bs-target="#exampleModal"

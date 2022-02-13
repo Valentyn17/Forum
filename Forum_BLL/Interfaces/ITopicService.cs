@@ -13,7 +13,7 @@ namespace Forum_BLL.Interfaces
 
         IEnumerable<TopicDTO> FindAll();
 
-        Task<TopicDTO> FindByIdAsync(int id);
+        TopicDTO FindById(int id);
         IEnumerable<TopicDTO> GetByUserId(string id);
         IEnumerable<TopicDTO> GetBySectionId(int id);
 

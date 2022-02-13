@@ -31,7 +31,9 @@ export class SharedService {
     getTopicList():Observable<any[]>{
       return this.http.get<any>(this.APIUrl+'/Topic');
     }
-
+    gettopicById(val : any):any{
+      return this.http.get<any>(this.APIUrl+'Topic/'+val)
+    }
     addTopic(val: any){
       return this.http.post(this.APIUrl+'/Topic', val);
     }
@@ -47,6 +49,32 @@ export class SharedService {
     }
 
     
+
+
+    getMessageList():Observable<any[]>{
+      return this.http.get<any>(this.APIUrl+'/Message');
+    }
+
+    getmessageById(val : any):any{
+      return this.http.get<any>(this.APIUrl+'Message/'+val)
+    }
+
+    addMessage(val: any){
+      return this.http.post(this.APIUrl+'/Message', val);
+    }
+  
+    updateMessage(val: any){
+      return this.http.put(this.APIUrl+'/Message', val);
+    }
+    deleteMessage(val: any){
+      return this.http.delete(this.APIUrl+'/Message/'+val);
+    }
+    getMessageListByTopic(val: any):Observable<any[]>{
+      return this.http.get<any>(this.APIUrl+'/Message/getByTopicId/'+val);
+    }
+
+
+
 
 
 }

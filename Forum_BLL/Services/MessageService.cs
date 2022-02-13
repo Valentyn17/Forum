@@ -47,9 +47,9 @@ namespace Forum_BLL.Services
             return _mapper.Map<IEnumerable<MessageDTO>>(messages);
         }
 
-        public async Task<MessageDTO> FindByIdAsync(int id)
+        public MessageDTO FindById(int id)
         {
-            var message = await _unitOfWork.MessageRepository.GetByIdAsync(id);
+            var message =_unitOfWork.MessageRepository.GetById(id);
             if (message == null)
                 return null;
             return _mapper.Map<MessageDTO>(message);
@@ -60,6 +60,12 @@ namespace Forum_BLL.Services
             if (userId == null)
                 throw new ForumException("Id was not setted");
             var messages = _unitOfWork.MessageRepository.GetAll().Where(m => m.UserId == userId);
+            return _mapper.Map<IQueryable<MessageDTO>>(messages);
+        }
+
+        public IEnumerable<MessageDTO> FindByTopicId(int topicId)
+        {
+            var messages = _unitOfWork.MessageRepository.GetAll().Where(m => m.TopicId == topicId);
             return _mapper.Map<IQueryable<MessageDTO>>(messages);
         }
 

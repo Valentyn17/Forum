@@ -13,7 +13,8 @@ namespace Forum_BLL.Interfaces
 
         IEnumerable<MessageDTO> FindAll();
 
-        Task<MessageDTO> FindByIdAsync(int id);  
+        IEnumerable<MessageDTO> FindByTopicId(int id);
+        MessageDTO FindById(int id);  
         IQueryable<MessageDTO> FindByUserId(string userId);
 
         Task<bool> UpdateAsync(MessageDTO model);

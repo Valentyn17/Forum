@@ -37,7 +37,7 @@ namespace Forum_PL.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return Ok(_mapper.Map<TopicModel>(_topicService.FindByIdAsync(id)));
+            return Ok(_mapper.Map<TopicModel>(_topicService.FindById(id)));
         }
 
         [HttpGet("getByUserId/{id}")]
@@ -60,7 +60,9 @@ namespace Forum_PL.Controllers
         {
             var topic = _mapper.Map<TopicDTO>(model);
             await _topicService.CreateAsync(topic);
+
             return Ok();
+
         }
 
 

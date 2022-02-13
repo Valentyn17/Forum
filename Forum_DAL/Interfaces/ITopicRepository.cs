@@ -9,7 +9,7 @@ namespace Forum_DAL.Interfaces
 {
     public interface ITopicRepository : IRepository<Topic>
     {
-        Task<Topic> GetByIdAsync(int id);
+        Topic GetById(int id);
         IEnumerable<Topic> GetAll();
 
         Task AddAsync(Topic entity);

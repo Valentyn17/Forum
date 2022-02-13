@@ -38,13 +38,19 @@ namespace Forum_PL.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return Ok(_mapper.Map<MessageModel>(_messageService.FindByIdAsync(id)));
+            return Ok(_mapper.Map<MessageModel>(_messageService.FindById(id)));
         }
 
         [HttpGet("getByUserId/{id}")]
         public IActionResult GetByUserId(string id)
         {
             return Ok(_mapper.Map<IEnumerable<MessageModel>>(_messageService.FindByUserId(id)));
+        }
+
+        [HttpGet("getByTopicId/{id}")]
+        public IActionResult GetByTopicId(int id)
+        {
+            return Ok(_mapper.Map<IEnumerable<MessageModel>>(_messageService.FindByTopicId(id)));
         }
 
         [HttpPost]

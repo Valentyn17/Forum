@@ -48,9 +48,9 @@ namespace Forum_BLL.Services
             return _mapper.Map<IEnumerable<TopicDTO>>(topics);
         }
 
-        public async Task<TopicDTO> FindByIdAsync(int id)
+        public TopicDTO FindById(int id)
         {
-            var topic =await  _unitOfWork.TopicRepository.GetByIdAsync(id);
+            var topic =_unitOfWork.TopicRepository.GetById(id);
             return _mapper.Map<TopicDTO>(topic);
         }
 

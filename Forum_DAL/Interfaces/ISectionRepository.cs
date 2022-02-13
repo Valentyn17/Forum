@@ -9,7 +9,7 @@ namespace Forum_DAL.Interfaces
 {
     public interface ISectionRepository: IRepository<Section>
     {
-        Task<Section> GetByIdAsync(int id);
+        Section GetByIdAsync(int id);
         IEnumerable<Section> GetAll();
 
         Task AddAsync(Section entity);

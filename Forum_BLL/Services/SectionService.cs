@@ -48,16 +48,10 @@ namespace Forum_BLL.Services
             return _mapper.Map<IEnumerable<SectionDTO>>(sections);
         }
 
-        public async Task<SectionDTO> FindByIdAsync(int id)
+        public SectionDTO FindById(int id)
         {
-            var section = await _unitOfWork.SectionRepository.GetByIdAsync(id);
+            var section = _unitOfWork.SectionRepository.GetByIdAsync(id);
             return _mapper.Map<SectionDTO>(section);
-        }
-
-        public IQueryable<SectionDTO> GetSortedSectionsByTopicCount()
-        {
-            var sections = _unitOfWork.SectionRepository.GetAll().OrderBy(x => x.Topics.Count);
-            return _mapper.Map<IQueryable<SectionDTO>>(sections);
         }
 
         public async Task<bool> UpdateAsync(SectionDTO model)

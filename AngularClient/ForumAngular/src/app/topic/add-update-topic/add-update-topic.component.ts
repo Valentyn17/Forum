@@ -3,6 +3,7 @@ import { SharedService } from 'src/app/shared.service';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from 'src/app/account.service';
 import { ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/models/User';
 @Component({
   selector: 'app-add-update-topic',
   templateUrl: './add-update-topic.component.html',
@@ -14,9 +15,9 @@ export class AddUpdateTopicComponent implements OnInit {
   Title:string;
   Description: string;
   SectionId:any;
-  UserId:any;
+  User: User;
+  UserId: any;
   MessagesIds:any[];
-  email: any;
 
   constructor(private service:SharedService, 
     private toastr: ToastrService,
@@ -29,8 +30,9 @@ export class AddUpdateTopicComponent implements OnInit {
     this.Id=this.topic.Id;
     this.Title=this.topic.Name;
     this.Description=this.topic.Description;
-    this.email=this.accountService.getUser(localStorage.getItem('token') as string).email;
-    this.accountService.getUserByEmail(this.email).subscribe(data=>{this.UserId=data})
+    this.User=this.accountService.getUser(localStorage.getItem('token') as string);
+    this.UserId=this.User.id;
+    
   }
 
 

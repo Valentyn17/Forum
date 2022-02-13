@@ -46,9 +46,9 @@ namespace Forum_DAL.Repositories
             return _forumDbContext.Sections.Include(x => x.Topics);
         }
 
-        public async Task<Section> GetByIdAsync(int id)
+        public Section GetByIdAsync(int id)
         {
-            return await _forumDbContext.Sections.Include(x => x.Topics).FirstOrDefaultAsync(x => x.Id==id);
+            return _forumDbContext.Sections.Include(x => x.Topics).First(x=>x.Id==id);
         }
 
         public void Update(Section entity)

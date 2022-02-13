@@ -47,9 +47,9 @@ namespace Forum_DAL.Repositories
             return _forumDbContext.Messages;
         }
 
-        public Task<Message> GetByIdAsync(int id)
+        public Message GetById(int id)
         {
-            return _forumDbContext.Messages.FirstOrDefaultAsync(x => x.Id == id);
+            return _forumDbContext.Messages.FirstOrDefault(x => x.Id == id);
         }
 
         public void Update(Message entity)

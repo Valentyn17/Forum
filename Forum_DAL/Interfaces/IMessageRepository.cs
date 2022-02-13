@@ -9,7 +9,7 @@ namespace Forum_DAL.Interfaces
 {
     public interface IMessageRepository:IRepository<Message>
     {
-        Task<Message> GetByIdAsync(int id);
+        Message GetById(int id);
         IEnumerable<Message> GetAll();
 
         Task AddAsync(Message entity);

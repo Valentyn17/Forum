@@ -20,6 +20,7 @@ import { ShowSectionComponent } from './section/show-section/show-section.compon
 import { AddUpdateSectionComponent } from './section/add-update-section/add-update-section.component';
 import { RouterModule } from '@angular/router';
 import { AddUpdateTopicComponent } from './topic/add-update-topic/add-update-topic.component';
+import { AddUpdateMessageComponent } from './message/add-update-message/add-update-message.component';
 
 
 
@@ -33,7 +34,8 @@ import { AddUpdateTopicComponent } from './topic/add-update-topic/add-update-top
     RegistrationComponent,
     ShowSectionComponent,
     AddUpdateSectionComponent,
-    AddUpdateTopicComponent
+    AddUpdateTopicComponent,
+    AddUpdateMessageComponent
   ],
   imports: [
     BrowserModule,
