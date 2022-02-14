@@ -25,8 +25,8 @@ export class AddUpdateMessageComponent implements OnInit {
 
   ngOnInit(): void {
     this.TopicId = this.route.snapshot.paramMap.get('topicid');
-    this.Id=this.message.Id;
-    this.Text=this.message.Text;
+    this.Id=this.message.id;
+    this.Text=this.message.text;
     this.User=this.accountService.getUser(localStorage.getItem('token') as string);
     this.UserId=this.User.id;
     
@@ -44,6 +44,7 @@ export class AddUpdateMessageComponent implements OnInit {
 
   updateMessage() {
     var item = {
+      Id: this.Id,
       Text: this.Text,
       UserId: this.UserId,
       TopicId: this.TopicId

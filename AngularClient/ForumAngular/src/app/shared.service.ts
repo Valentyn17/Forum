@@ -31,8 +31,8 @@ export class SharedService {
     getTopicList():Observable<any[]>{
       return this.http.get<any>(this.APIUrl+'/Topic');
     }
-    gettopicById(val : any):any{
-      return this.http.get<any>(this.APIUrl+'Topic/'+val)
+    gettopicById(val : any):Observable<any>{
+      return this.http.get<any>(this.APIUrl+'/Topic/'+val)
     }
     addTopic(val: any){
       return this.http.post(this.APIUrl+'/Topic', val);

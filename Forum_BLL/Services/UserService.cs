@@ -126,5 +126,12 @@ namespace Forum_BLL.Services
             return true;
 
         }
+
+
+        public async Task DeleteAccountByUserId(string id)
+        {
+            var user = _userManager.Users.SingleOrDefault(u => u.Id == id);
+            await _userManager.DeleteAsync(user);
+        }
     }
 }

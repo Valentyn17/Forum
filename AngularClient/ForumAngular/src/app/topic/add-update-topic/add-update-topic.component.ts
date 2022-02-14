@@ -27,9 +27,9 @@ export class AddUpdateTopicComponent implements OnInit {
   ngOnInit(): void {
     this.SectionId = this.route.snapshot.paramMap.get('id');
     console.log('here');
-    this.Id=this.topic.Id;
-    this.Title=this.topic.Name;
-    this.Description=this.topic.Description;
+    this.Id=this.topic.id;
+    this.Title=this.topic.title;
+    this.Description=this.topic.description;
     this.User=this.accountService.getUser(localStorage.getItem('token') as string);
     this.UserId=this.User.id;
     

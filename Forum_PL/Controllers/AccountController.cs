@@ -95,5 +95,11 @@ namespace Forum_PL.Controllers
             return Ok(_userService.GetUserByEmailAsync(email));
         }
 
+        [HttpDelete("deleteUserById")]
+        public IActionResult DeleteUserById(string id)
+        {
+            return Ok(_userService.DeleteAccountByUserId(id));
+        }
+
     }
 }

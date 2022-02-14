@@ -17,8 +17,8 @@ export class AddUpdateSectionComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('here');
-    this.Id=this.section.Id;
-    this.Name=this.section.Name;
+    this.Id=this.section.id;
+    this.Name=this.section.name;
   }
 
   checkInputOnAdd(): boolean {

@@ -54,7 +54,15 @@ namespace Forum_DAL.Repositories
 
         public void Update(Message entity)
         {
-            _forumDbContext.Entry(entity).State = EntityState.Modified;   
+            Message message = new Message()
+            {
+                Id = entity.Id,
+                Text = entity.Text,
+                TopicId = entity.TopicId,
+                UserId = entity.UserId
+            };
+            _forumDbContext.Attach(message);
+            _forumDbContext.Entry(message).State = EntityState.Modified;   
         }
     }
 }

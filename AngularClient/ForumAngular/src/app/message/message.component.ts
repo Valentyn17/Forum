@@ -9,7 +9,7 @@ import { AccountService } from '../account.service';
   styleUrls: ['./message.component.css']
 })
 export class MessageComponent implements OnInit {
-  constructor(private serice: SharedService,
+  constructor(private service: SharedService,
     private route: ActivatedRoute,
     private accountService: AccountService ) { }
   TopicId:any;
@@ -18,14 +18,16 @@ export class MessageComponent implements OnInit {
   ActivateAddUpdateMessageComp: boolean=false;
   message:any={};
   userId:any;
-  topic: any;
-
-
+  topic:any;
+  
   ngOnInit(): void {
+    this.TopicId = parseInt(this.route.snapshot.paramMap.get('topicid')as string);
+    this.service.gettopicById(this.TopicId).subscribe(data=>{
+      this.topic=data;
+    });
     this.refreshMessageList();
     this.message.TopicId=this.TopicId;
-    this.message.UserId=this.userId
-    this.topic=this.serice.gettopicById(this.TopicId);
+    this.message.UserId=this.userId;
   }
 
   addClick(){
@@ -52,15 +54,14 @@ export class MessageComponent implements OnInit {
   deleteClick(item: any)
   {
      if(confirm("Are you sure?")){
-       this.serice.deleteMessage(item.Id).subscribe(data=>{
-         alert('Message with id '+data.toString()+" was deleted!!");
+       this.service.deleteMessage(item.id).subscribe(data=>{
+         alert("Message  was deleted!!");
          this.refreshMessageList();
        });
      }
   }
   refreshMessageList(){
-    this.TopicId = this.route.snapshot.paramMap.get('topicid');
-    this.serice.getMessageList().subscribe(data=>{
+    this.service.getMessageList().subscribe(data=>{
       this.MessageList=data;
     });
   }

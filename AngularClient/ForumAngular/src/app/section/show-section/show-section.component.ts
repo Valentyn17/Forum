@@ -42,8 +42,8 @@ export class ShowSectionComponent implements OnInit {
   deleteClick(item: any)
   {
      if(confirm("Are you sure?")){
-       this.serice.deleteSection(item.Id).subscribe(data=>{
-         alert('Section with id '+data.toString()+" was deleted!!");
+       this.serice.deleteSection(item.id).subscribe(data=>{
+         alert("Section  was deleted!!");
          this.refreshSectionList();
        });
      }

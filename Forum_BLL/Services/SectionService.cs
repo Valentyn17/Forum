@@ -36,7 +36,7 @@ namespace Forum_BLL.Services
 
         public async Task<bool> DeleteAsync(int id)
         {
-            await _unitOfWork.TopicRepository.DeletebyIdAsync(id);
+            await _unitOfWork.SectionRepository.DeletebyIdAsync(id);
             var result = await _unitOfWork.SaveAsync() != 0;
             return result;
 

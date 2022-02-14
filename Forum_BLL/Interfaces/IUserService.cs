@@ -66,5 +66,7 @@ namespace Forum_BLL.Interfaces
         /// </returns>
         Task<IEnumerable<IdentityRole>> GetRoles();
 
+
+        public Task DeleteAccountByUserId(string id);
     }
 }
