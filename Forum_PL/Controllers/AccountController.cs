@@ -77,6 +77,12 @@ namespace Forum_PL.Controllers
             return Ok(await _userService.GetRoles());
         }
 
+        [HttpGet("getUsers")]
+        public IActionResult GetUsers()
+        {
+            return Ok(_userService.GetAllUsers());
+        }
+
         [HttpPost("assignUserToRole")]
         public async Task<IActionResult> AssignUserToRole(AssignUserToRoleModel model)
         {

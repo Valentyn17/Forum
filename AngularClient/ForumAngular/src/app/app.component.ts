@@ -9,12 +9,14 @@ import { AccountService } from './account.service';
 export class AppComponent implements OnInit {
   title = 'ForumAngular';
   ifLoggedIn = false;
+  ifadmin=false;
   constructor(public AccountService: AccountService) {
   }
   
 
 
   ngOnInit(): void {
+    this.ifadmin=this.AccountService.ifAdmin();
     this.ifLoggedIn = this.AccountService.ifLoggedIn();
   }
   refresh(){

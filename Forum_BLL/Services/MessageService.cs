@@ -66,7 +66,7 @@ namespace Forum_BLL.Services
         public IEnumerable<MessageDTO> FindByTopicId(int topicId)
         {
             var messages = _unitOfWork.MessageRepository.GetAll().Where(m => m.TopicId == topicId);
-            return _mapper.Map<IQueryable<MessageDTO>>(messages);
+            return _mapper.Map<IEnumerable<MessageDTO>>(messages);
         }
 
         public async Task<bool> UpdateAsync(MessageDTO model)

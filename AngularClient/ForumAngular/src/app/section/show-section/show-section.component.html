@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary float-left m-2" data-bs-toggle="modal" data-bs-target="#exampleModal"
+<button *ngIf="Ifadmin" type="button" class="btn btn-primary float-left m-2" data-bs-toggle="modal" data-bs-target="#exampleModal"
 (click)="addClick()"
 data-backdrop="static" data-keyboard="false">
     Create section
@@ -30,8 +30,8 @@ data-backdrop="static" data-keyboard="false">
     <tbody>
         <tr *ngFor="let dataItem of SectionList">
             <td><a routerLink='{{dataItem.id}}/topic' >{{dataItem.name}}</a></td>
-            <td>
-                <button type="button" class="btn btn-primary mr-1"
+            <td *ngIf="Ifadmin">
+                <button  type="button" class="btn btn-primary mr-1"
                 data-bs-toggle="modal" data-bs-target="#exampleModal"
                 (click)="editClick(dataItem)"
                 data-backdrop="static" data-keyboard="false">

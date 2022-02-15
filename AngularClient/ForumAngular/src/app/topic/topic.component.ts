@@ -17,6 +17,7 @@ export class TopicComponent implements OnInit {
     private route: ActivatedRoute,
     private accountService: AccountService ) { }
   SectionId:any;
+  Ifadmin=false;
   TopicList : any=[];
   ModalTitle: string="";
   ActivateAddUpdateTopicComp: boolean=false;
@@ -24,6 +25,7 @@ export class TopicComponent implements OnInit {
   userId:any;
 
   ngOnInit(): void {
+    this.Ifadmin=this.accountService.ifAdmin();
     this.refreshTopicList();
     this.topic.SectionId=this.SectionId;
     this.topic.UserId=this.userId
@@ -54,8 +56,8 @@ export class TopicComponent implements OnInit {
   deleteClick(item: any)
   {
      if(confirm("Are you sure?")){
-       this.serice.deleteTopic(item.Id).subscribe(data=>{
-         alert('Topic with id '+data.toString()+" was deleted!!");
+       this.serice.deleteTopic(item.id).subscribe(data=>{
+         alert("Topic  was deleted!!");
          this.refreshTopicList();
        });
      }

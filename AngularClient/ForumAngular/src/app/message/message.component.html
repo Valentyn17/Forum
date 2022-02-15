@@ -15,7 +15,7 @@
     <tbody>
         <tr *ngFor="let dataItem of MessageList">
             <td>{{dataItem.text}}</td>
-            <td>
+            <td *ngIf="Ifadmin || dataItem.userId==userId">
                 <button type="button" class="btn btn-primary mr-1"
                 data-bs-toggle="modal" data-bs-target="#exampleModal"
                 (click)="editClick(dataItem)"

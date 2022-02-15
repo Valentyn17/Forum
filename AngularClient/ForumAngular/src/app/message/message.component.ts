@@ -19,8 +19,12 @@ export class MessageComponent implements OnInit {
   message:any={};
   userId:any;
   topic:any;
+  Ifadmin=false;
+  messageOwner=false;
   
   ngOnInit(): void {
+    this.Ifadmin=this.accountService.ifAdmin();
+    
     this.TopicId = parseInt(this.route.snapshot.paramMap.get('topicid')as string);
     this.service.gettopicById(this.TopicId).subscribe(data=>{
       this.topic=data;
@@ -61,7 +65,7 @@ export class MessageComponent implements OnInit {
      }
   }
   refreshMessageList(){
-    this.service.getMessageList().subscribe(data=>{
+    this.service.getMessageListByTopic(this.TopicId).subscribe(data=>{
       this.MessageList=data;
     });
   }

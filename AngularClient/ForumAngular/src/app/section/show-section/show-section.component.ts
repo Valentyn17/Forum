@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from 'src/app/account.service';
 import { SharedService } from 'src/app/shared.service';
 @Component({
   selector: 'app-show-section',
@@ -7,8 +8,8 @@ import { SharedService } from 'src/app/shared.service';
 })
 export class ShowSectionComponent implements OnInit {
 
-  constructor(private serice: SharedService) { }
-
+  constructor(private serice: SharedService, private accountService: AccountService) { }
+  Ifadmin=false;
   SectionList : any=[];
   ModalTitle: string="";
   ActivateAddUpdateSectionComp: boolean=false;
@@ -16,6 +17,7 @@ export class ShowSectionComponent implements OnInit {
   
 
   ngOnInit(): void {
+    this.Ifadmin=this.accountService.ifAdmin();
     this.refreshSectionList();
   }
 

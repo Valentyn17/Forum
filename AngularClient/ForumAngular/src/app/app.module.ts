@@ -21,6 +21,7 @@ import { AddUpdateSectionComponent } from './section/add-update-section/add-upda
 import { RouterModule } from '@angular/router';
 import { AddUpdateTopicComponent } from './topic/add-update-topic/add-update-topic.component';
 import { AddUpdateMessageComponent } from './message/add-update-message/add-update-message.component';
+import { UserComponent } from './user/user.component';
 
 
 
@@ -35,7 +36,8 @@ import { AddUpdateMessageComponent } from './message/add-update-message/add-upda
     ShowSectionComponent,
     AddUpdateSectionComponent,
     AddUpdateTopicComponent,
-    AddUpdateMessageComponent
+    AddUpdateMessageComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

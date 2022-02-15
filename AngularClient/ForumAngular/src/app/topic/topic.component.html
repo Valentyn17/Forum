@@ -30,7 +30,7 @@ data-backdrop="static" data-keyboard="false">
     <tbody>
         <tr *ngFor="let dataItem of TopicList">
             <td><a routerLink='{{dataItem.id}}' >{{dataItem.title}}</a></td>
-            <td>
+            <td *ngIf="Ifadmin">
                 <button type="button" class="btn btn-primary mr-1"
                 data-bs-toggle="modal" data-bs-target="#exampleModal"
                 (click)="editClick(dataItem)"

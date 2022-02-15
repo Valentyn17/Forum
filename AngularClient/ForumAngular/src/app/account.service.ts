@@ -14,6 +14,8 @@ export class AccountService {
 
   readonly BaseURI = 'http://localhost:49414';
   user: User;
+  userToCheck: User;
+  roles: string[]=[];
 
   constructor(private fb:FormBuilder,
      private http:HttpClient, 
@@ -34,6 +36,12 @@ export class AccountService {
     })
   })
 
+  getUserList():Observable<any[]>{
+    return this.http.get<any>(this.BaseURI+'/Account/getUsers');
+  }
+  deleteUser(val: any){
+    return this.http.delete(this.BaseURI+'/Account/deleteUserById'+val);
+  }
   register() {
     var body = {
       FirstName: this.formModel.value.Name,
@@ -65,8 +73,27 @@ export class AccountService {
     }
     return false;
   }
+
+  ifAdmin():boolean{
+    var token=localStorage.getItem('token');
+    if(token==null) return false;
+    else
+    {
+      this.userToCheck= this.getUser(token);
+      console.log(this.userToCheck)
+      this.roles=this.userToCheck.role;
+      console.log(this.roles);
+      if(this.roles.includes('admin'))
+      {
+      return true;
+      }
+      return false;
+    }
+    
+  }
   signOut() {
     localStorage.removeItem('token');
+    this.user=new User([],'');
     this.router.navigate(['']);
   }
 
@@ -77,6 +104,7 @@ export class AccountService {
 
   public getUser(token:string):User {
     let a = JSON.parse(atob(token.split('.')[1]))["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+    console.log(a);
     let b = JSON.parse(atob(token.split('.')[1]))["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]
     return new User(a, b);    
   }
