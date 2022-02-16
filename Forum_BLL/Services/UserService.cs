@@ -131,6 +131,27 @@ namespace Forum_BLL.Services
         public async Task DeleteAccountByUserId(string id)
         {
             var user = _userManager.Users.SingleOrDefault(u => u.Id == id);
+            var userprofile = _unitOfWork.UserProfileRepository.GetAll().FirstOrDefault(u=>u.UserId==id);
+            if (userprofile != null)
+            {
+                await _unitOfWork.UserProfileRepository.Delete(userprofile);
+            }
+            var messages = _unitOfWork.MessageRepository.GetAll().Where(t => t.UserId == id);
+            if (messages.Count() != 0)
+            {
+                foreach (var item in messages)
+                {
+                    await _unitOfWork.MessageRepository.DeletebyIdAsync(item.Id);
+                }
+            }
+            var topics = _unitOfWork.TopicRepository.GetAll().Where(t => t.UserId == id);
+            if (topics.Count() != 0)
+            {
+                foreach (var item in topics)
+                {
+                    await _unitOfWork.TopicRepository.DeletebyIdAsync(item.Id);
+                }
+            }
             await _userManager.DeleteAsync(user);
         }
     }

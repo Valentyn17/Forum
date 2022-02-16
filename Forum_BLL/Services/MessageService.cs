@@ -12,10 +12,17 @@ using System.Threading.Tasks;
 
 namespace Forum_BLL.Services
 {
+    /// <inheritdoc cref="IMessageService"/>
     public class MessageService : IMessageService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+
+        /// <summary>
+        /// Constructor of Message Service
+        /// </summary>
+        /// <param name="mapper">mapper</param>
+        /// <param name="unitOfWork">unit of work</param>
         public MessageService(IMapper mapper, IUnitOfWork unitOfWork)
         {
             _mapper = mapper;

@@ -27,7 +27,7 @@ export class UserComponent implements OnInit {
   deleteClick(item: any)
   {
      if(confirm("Are you sure?")){
-       this.serice.deleteTopic(item.id).subscribe(data=>{
+       this.accountService.deleteUser(item.id).subscribe(data=>{
          alert("User was deleted!!");
          this.refreshUserList();
        });

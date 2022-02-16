@@ -45,7 +45,14 @@ export class AddUpdateTopicComponent implements OnInit {
       SectionId: this.SectionId
     }
 
-    this.service.addTopic(item).subscribe(res => {this.toastr.success("Item added succsessfuly", "Success")});
+    this.service.addTopic(item).subscribe({
+      complete: () => {
+        this.toastr.success('New topic created!', 'Adding successful.');
+      }, 
+      error: () => {
+        this.toastr.error('Something goes wrong','Adding failed.');
+      }  
+    });
   }
 
   updateTopic() {
@@ -58,7 +65,13 @@ export class AddUpdateTopicComponent implements OnInit {
       SectionId: this.SectionId
     }
 
-    this.service.updateTopic(item).subscribe(res => {this.toastr.success("Item updated succsessfuly", "Success")});
+    this.service.updateTopic(item).subscribe({
+      complete: () => {
+      this.toastr.success('Topic updated!', 'Updating successful.');
+    }, 
+    error: () => {
+      this.toastr.error('Something goes wrong','Updating failed.');
+    }  });
   }
 
 }

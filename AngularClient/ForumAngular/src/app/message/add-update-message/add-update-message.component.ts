@@ -39,7 +39,12 @@ export class AddUpdateMessageComponent implements OnInit {
       UserId: this.UserId,
       TopicId: this.TopicId
     }
-    this.service.addMessage(item).subscribe(res => {this.toastr.success("Item added succsessfuly", "Success")});
+    this.service.addMessage(item).subscribe({complete: () => {
+      this.toastr.success('New message created!', 'Adding successful.');
+    }, 
+    error: () => {
+      this.toastr.error('Something goes wrong','Adding failed.');
+    }  });
   }
 
   updateMessage() {
@@ -50,6 +55,11 @@ export class AddUpdateMessageComponent implements OnInit {
       TopicId: this.TopicId
     }
 
-    this.service.updateMessage(item).subscribe(res => {this.toastr.success("Item updated succsessfuly", "Success")});
+    this.service.updateMessage(item).subscribe({complete: () => {
+      this.toastr.success('Message updated!', 'Updating successful.');
+    }, 
+    error: () => {
+      this.toastr.error('Something goes wrong','Adding failed.');
+    }  });
   }
 }

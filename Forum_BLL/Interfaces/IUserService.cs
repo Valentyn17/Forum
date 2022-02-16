@@ -10,6 +10,11 @@ namespace Forum_BLL.Interfaces
 {
     public interface IUserService
     {
+        /// <summary>
+        /// Register method
+        /// </summary>
+        /// <param name="user">Model for registering</param>
+        /// <returns>True if success, therefore false</returns>
         Task<bool> Register(Register user);
        
         

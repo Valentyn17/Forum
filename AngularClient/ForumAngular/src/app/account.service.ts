@@ -40,7 +40,7 @@ export class AccountService {
     return this.http.get<any>(this.BaseURI+'/Account/getUsers');
   }
   deleteUser(val: any){
-    return this.http.delete(this.BaseURI+'/Account/deleteUserById'+val);
+    return this.http.delete(this.BaseURI+'/Account/deleteUserById/'+ val);
   }
   register() {
     var body = {
